@@ -1,0 +1,271 @@
+body {
+  background: #e94e57;
+  color: #2e271a;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+}
+
+.navbar {
+  background: #e94e57;
+  border: none;
+  padding: 20px;
+  margin: 0;
+}
+.navbar .navbar-brand {
+  color: #fff;
+  font-size: 20px;
+}
+.navbar .navbar-brand:focus, .navbar .navbar-brand:hover {
+  color: #fff;
+}
+.navbar .navbar-nav > li > a {
+  color: #fff;
+  font-size: 18px;
+}
+.navbar .navbar-nav > li > a:focus, .navbar .navbar-nav > li > a:hover {
+  color: #A81219;
+  outline: none;
+}
+.navbar .navbar-toggle .icon-bar {
+  background-color: #fff;
+}
+.navbar .navbar-toggle:focus, .navbar .navbar-toggle:hover {
+  background-color: #A81219;
+  border: none;
+}
+
+.card {
+  background: #ffffff;
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.4);
+  padding: 30px;
+  font-size: 14px;
+  margin-bottom: 2em;
+}
+
+.row {
+  margin-top: 1em;
+}
+
+button {
+  outline: none !important;
+}
+
+.btn-default:hover {
+  background: none;
+}
+
+.dropdown {
+  width: 100%;
+}
+.dropdown .btn {
+  border: 1px solid #31928b;
+  width: 100%;
+  color: #31928b;
+  text-align: left;
+}
+.dropdown .btn .caret {
+  float: right;
+  line-height: 1em;
+  margin-top: 0.5em;
+}
+.dropdown .dropdown-menu {
+  width: 100%;
+}
+
+.dropdown.open .btn:focus {
+  background: none;
+}
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #31928b !important;
+}
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #31928b !important;
+}
+
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #31928b !important;
+}
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #31928b !important;
+}
+
+input.form-control:focus {
+  outline: none !important;
+  box-shadow: none;
+}
+
+input.form-control {
+  background: #fff;
+  border: none;
+  border-bottom: 1px solid #31928b;
+  border-radius: 0;
+  color: #0B6962;
+  box-shadow: none;
+}
+
+input.form-control[readonly] {
+  background: #31928b;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.inputline {
+  display: block;
+  background: #31928b;
+  height: 2px;
+  width: 100%;
+  top: -2px;
+  position: relative;
+  -webkit-transform: scale(0, 1);
+  -ms-transform: scale(0, 1);
+  -o-transform: scale(0, 1);
+  transform: scale(0, 1);
+  -webkit-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+input.form-control:focus + .inputline {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+}
+
+hr {
+  border-top: 1px solid #31928b;
+}
+
+.btn-simple {
+  background: none;
+  color: #31928b;
+  font-size: 16px;
+  cursor: pointer;
+  border: 0;
+}
+
+.btn-right {
+  float: right;
+  text-align: right;
+}
+
+.btn-simple:hover {
+  color: #0B6962;
+  text-shadow: 1px 2px 5px #31928b;
+}
+
+.recipe .title {
+  font-size: 24px;
+}
+.recipe hr {
+  border-top: 1px dashed #534833;
+}
+.recipe ::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #534833 !important;
+}
+.recipe ::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #534833 !important;
+}
+.recipe :-ms-input-placeholder {
+  /* IE 10+ */
+  color: #534833 !important;
+}
+.recipe :-moz-placeholder {
+  /* Firefox 18- */
+  color: #534833 !important;
+}
+.recipe .input-group {
+  border: 1px dashed #534833;
+  border-radius: 4px;
+}
+.recipe .input-group input.form-control {
+  border: none;
+  box-shadow: none;
+  font-size: 16px;
+  color: #534833;
+}
+.recipe .input-group input.form-control:focus {
+  color: #3A2B0F;
+}
+.recipe .input-group .inputline {
+  top: 33px;
+  z-index: 9;
+  background-color: #534833;
+}
+.recipe .input-group .input-group-btn .btn {
+  box-shadow: none;
+  border: none;
+}
+.recipe .input-group .input-group-btn .btn:hover {
+  color: #fff;
+  border: 1px solid #534833;
+  background-color: #534833;
+}
+.recipe .input-group .input-group-btn .btn:focus {
+  outline: none;
+  background-color: #3A2B0F;
+  color: #fff;
+}
+.recipe .input-group .input-group-btn .delete {
+  color: #e94e57;
+}
+.recipe .input-group .input-group-btn .delete:hover {
+  border-color: #e94e57;
+  background-color: #e94e57;
+}
+.recipe .input-group .input-group-btn .delete:focus {
+  background-color: #A81219;
+}
+.recipe .readonly {
+  border: none;
+}
+.recipe .readonly input.form-control[readonly] {
+  border: none;
+  background: none;
+  color: #534833;
+}
+.recipe .editable {
+  margin-top: 1em;
+}
+.recipe .btn-simple {
+  color: #534833;
+}
+.recipe .btn-simple:hover {
+  color: #3A2B0F;
+  text-shadow: 1px 2px 5px #534833;
+}
+
+@media (max-width: 970px) {
+  .card {
+    padding: 20px;
+  }
+}
+@media (max-width: 380px) {
+  .navbar .navbar-brand {
+    font-size: 16px;
+  }
+  .navbar .navbar-nav > li > a {
+    font-size: 14px;
+  }
+
+  .btn-simple {
+    font-size: 14px;
+  }
+
+  .recipe .title {
+    font-size: 20px;
+  }
+  .recipe .input-group input.form-control {
+    font-size: 14px;
+  }
+}

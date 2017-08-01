@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Baking Conversion App</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"><i class="fa fa-calculator"></i> Baking Conversion App</a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" data-toggle="modal" data-target="#aboutModal"><i class="fa fa-info-circle"></i> About</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Modal -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">About</h4>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+
+            <div class="dropdown ingredients-list">
+              <button class="btn btn-default dropdown-toggle" type="button" id="ingredients" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Choose ingredients
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="ingredients">
+                <li><a href="#">Butter</a></li>
+                <li><a href="#">Brown Sugar</a></li>
+                <li><a href="#">Cocoa Powder</a></li>
+                <li><a href="#">Flour</a></li>
+                <li><a href="#">Icing Sugar</a></li>
+                <li><a href="#">Liquid</a></li>
+                <li><a href="#">Sugar</a></li>
+              </ul>
+            </div><!--end dropdown -->
+            
+            <div class="row">
+              <div class="col-sm-2 col-xs-2">
+                <h5>From: </h5>
+              </div>
+              <div class="col-sm-5 col-xs-5">                
+                  <input type="text" class="form-control" placeholder="Enter amount">
+                  <span class="inputline"></span>
+              </div>
+              <div class="col-sm-5 col-xs-5">
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="from-units" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Units
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="from-units">
+                    <li><a href="#">Cups</a></li>
+                    <li><a href="#">oz (Ounce)</a></li>
+                    <li><a href="#">g (gram)</a></li>
+                  </ul>
+                </div><!--end dropdown -->
+              </div>
+            </div><!--end row2 -->
+
+            <div class="row">
+              <div class="col-sm-2 col-xs-2">
+                <h5>To: </h5>
+              </div>
+              <div class="col-sm-10 col-xs-10">
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="to-units" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Units
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="to-units">
+                    <li><a href="#">Cups</a></li>
+                    <li><a href="#">oz (Ounce)</a></li>
+                    <li><a href="#">g (gram)</a></li>
+                  </ul>
+                </div><!--end dropdown -->
+              </div>
+            </div><!--end row3 -->
+            <hr>
+            <div class="row">                           
+              <div class="col-sm-8 col-xs-8">
+                <input type="text" class="form-control" readonly="readonly" value="Flour">
+              </div>
+              <div class="col-sm-4 col-xs-4">
+                <input type="text" class="form-control" readonly="readonly" value="150 g">
+              </div> 
+            </div><!--end row 4-->
+            <hr>
+            <div class="row">
+              <div class="col-sm-6 col-xs-6">
+                <button class="btn-simple btn-left" ><i class="fa fa-refresh"></i> Reset</button>
+              </div>
+              <div class="col-sm-6 col-xs-6">
+                <button class="btn-simple btn-right" ><i class="fa fa-plus"></i> Add to recipe</button>
+              </div>
+            </div><!--end row -->
+          </div>
+        </div>
+
+         <div class="col-sm-6">
+          <div class="card recipe">
+            <p class="title">MY RECIPE</p>
+            <hr>
+
+            <div class="input-group readonly">
+              <input type="text" class="form-control" value="Milk, 250 ml" readonly>
+              <span class="input-group-btn">
+                <button class="btn btn-default delete" type="button"><i class="fa fa-close"></i></button>
+              </span>
+            </div><!-- READONLY input-group -->
+            <div class="input-group readonly">
+              <input type="text" class="form-control" value="Butter, 120 g" readonly>
+              <span class="input-group-btn">
+                <button class="btn btn-default delete" type="button"><i class="fa fa-close"></i></button>
+              </span>
+            </div><!-- READONLY input-group -->
+
+             <div class="input-group editable">
+              <input type="text" class="form-control" placeholder="Add your own ingredients">
+              <span class="inputline"></span>
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button"><i class="fa fa-plus"></i></button>
+              </span>
+            </div><!-- /input-group -->
+
+            <hr>
+            <div class="row">
+              <div class="col-sm-6 col-xs-6">
+                <button class="btn-simple btn-left" ><i class="fa fa-print"></i> Print</button>
+              </div>
+              <div class="col-sm-6 col-xs-6">
+                <button class="btn-simple btn-right" ><i class="fa fa-clone"></i> Copy</button>
+              </div>
+            </div><!--end row -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/d33f9523b7.js"></script>
+
+  </body>
+</html>
