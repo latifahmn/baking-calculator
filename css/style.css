@@ -96,6 +96,12 @@ button {
   color: #31928b !important;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 input.form-control:focus {
   outline: none !important;
   box-shadow: none;
@@ -140,8 +146,42 @@ input.form-control:focus + .inputline {
   transform: scale(1);
 }
 
+input.form-control.ng-invalid + .inputline {
+  background: #e94e57;
+}
+
 hr {
   border-top: 1px solid #31928b;
+}
+
+.edit-lqd {
+  width: 100%;
+  border: none;
+  background: none;
+  text-decoration: underline;
+  color: #31928b;
+  margin-top: 5px;
+  text-align: left;
+}
+
+.edit-lqd-btn {
+  background: #31928b;
+  color: #fff;
+  border-color: #31928b;
+}
+
+.edit-lqd-btn:hover, .edit-lqd-btn:focus {
+  color: #fff;
+  background: #0B6962;
+}
+
+input[readonly] + .input-group-btn {
+  display: none;
+}
+
+.input-group .form-control[readonly] {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .btn-simple {
@@ -162,9 +202,6 @@ hr {
   text-shadow: 1px 2px 5px #31928b;
 }
 
-.recipe .title {
-  font-size: 24px;
-}
 .recipe hr {
   border-top: 1px dashed #534833;
 }
@@ -184,6 +221,9 @@ hr {
   /* Firefox 18- */
   color: #534833 !important;
 }
+.recipe input[readonly] + .input-group-btn {
+  display: table-cell;
+}
 .recipe .input-group {
   border: 1px dashed #534833;
   border-radius: 4px;
@@ -196,6 +236,14 @@ hr {
 }
 .recipe .input-group input.form-control:focus {
   color: #3A2B0F;
+}
+.recipe .input-group .input-group-addon {
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  width: 25%;
+  text-align: right;
 }
 .recipe .input-group .inputline {
   top: 33px;
@@ -234,6 +282,21 @@ hr {
   background: none;
   color: #534833;
 }
+.recipe .title {
+  border: none;
+}
+.recipe .title #recipeName {
+  border-bottom: 1px solid #534833;
+}
+.recipe .title #recipeName[readonly] {
+  font-size: 24px;
+  background: none;
+  border: none;
+  text-transform: uppercase;
+}
+.recipe .title #save-recipe-btn {
+  display: none;
+}
 .recipe .editable {
   margin-top: 1em;
 }
@@ -262,10 +325,18 @@ hr {
     font-size: 14px;
   }
 
-  .recipe .title {
+  .recipe .title #recipeName[readonly] {
     font-size: 20px;
   }
   .recipe .input-group input.form-control {
     font-size: 14px;
+  }
+  .recipe .input-group .input-group-addon {
+    font-size: 14px;
+  }
+}
+@media print {
+  #calculator, .tooltip, #recipe-btns, .editable, .recipe input[readonly] + .input-group-btn {
+    display: none;
   }
 }

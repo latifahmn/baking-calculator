@@ -14,7 +14,7 @@
 
   </head>
 
-  <body>
+  <body ng-app="baking-app" ng-controller="controller">
 
     <nav class="navbar navbar-default">
       <div class="container">
@@ -44,7 +44,10 @@
             <h4 class="modal-title" id="myModalLabel">About</h4>
           </div>
           <div class="modal-body">
-            ...
+            <p>This app serves as a tool for bakers to convert their ingredient measurements quickly and easily.</p>
+            <p>It is inspired by <strong>Gemma Stafford's Weight Conversion Chart for Baking Ingredients.</strong> Check out the <a target="_blank" href="https://www.biggerbolderbaking.com/weight-conversion-chart/">original chart here</a>.</p>
+            <p>The ingredient list on this app is only limited to what is available on her chart. Anyhow, more information on other ingredients is highly welcomed and appreciated.</p>
+            <p>Please email me to submit your weight conversion chart and I will update the ingredient list accordingly.</p>   
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -55,22 +58,15 @@
     
     <div class="container">
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-6" id="calculator">
           <div class="card">
-
-            <div class="dropdown ingredients-list">
+            <div class="dropdown">
               <button class="btn btn-default dropdown-toggle" type="button" id="ingredients" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Choose ingredients
+                {{ ingredient }}
                 <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu" aria-labelledby="ingredients">
-                <li><a href="#">Butter</a></li>
-                <li><a href="#">Brown Sugar</a></li>
-                <li><a href="#">Cocoa Powder</a></li>
-                <li><a href="#">Flour</a></li>
-                <li><a href="#">Icing Sugar</a></li>
-                <li><a href="#">Liquid</a></li>
-                <li><a href="#">Sugar</a></li>
+              <ul class="dropdown-menu" aria-labelledby="ingredients" id="ingredientList">
+                <li><a href="#" ng-repeat="x in ingredientList" ng-click="setIngredient(x)">{{x}}</a></li>
               </ul>
             </div><!--end dropdown -->
             
@@ -78,20 +74,19 @@
               <div class="col-sm-2 col-xs-2">
                 <h5>From: </h5>
               </div>
-              <div class="col-sm-5 col-xs-5">                
-                  <input type="text" class="form-control" placeholder="Enter amount">
+              <div class="col-sm-5 col-xs-5" data-toggle="tooltip" data-placement="top" title="Numeric input only. Eg: 20, 100" >                        
+                  <input type="number" class="form-control" placeholder="Enter amount" ng-model="amount" id="amount">
                   <span class="inputline"></span>
               </div>
               <div class="col-sm-5 col-xs-5">
                 <div class="dropdown">
                   <button class="btn btn-default dropdown-toggle" type="button" id="from-units" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    Units
+                    {{frmUnit}}
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="from-units">
-                    <li><a href="#">Cups</a></li>
-                    <li><a href="#">oz (Ounce)</a></li>
-                    <li><a href="#">g (gram)</a></li>
+                    <li ng-if="ingredient != 'Liquid'" ng-repeat="u in units"><a href="#" ng-click="setFromUnit(u.unit)">{{u.label}}</a></li>
+                    <li ng-if="ingredient == 'Liquid'" ng-repeat="u in liquidUnits"><a href="#" ng-click="setFromUnit(u.unit)">{{u.label}}</a></li>
                   </ul>
                 </div><!--end dropdown -->
               </div>
@@ -104,33 +99,39 @@
               <div class="col-sm-10 col-xs-10">
                 <div class="dropdown">
                   <button class="btn btn-default dropdown-toggle" type="button" id="to-units" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    Units
+                    {{toUnit}}
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="to-units">
-                    <li><a href="#">Cups</a></li>
-                    <li><a href="#">oz (Ounce)</a></li>
-                    <li><a href="#">g (gram)</a></li>
+                    <li ng-if="ingredient != 'Liquid' && frmUnit!=u.unit" ng-repeat="u in units"><a href="#" ng-click="setToUnit(u.unit)">{{u.label}}</a></li>
+                    <li ng-if="ingredient == 'Liquid' && frmUnit!=u.unit" ng-repeat="u in liquidUnits"><a href="#" ng-click="setToUnit(u.unit)">{{u.label}}</a></li>
                   </ul>
                 </div><!--end dropdown -->
               </div>
             </div><!--end row3 -->
-            <hr>
-            <div class="row">                           
+
+            <hr ng-if="validateInputs()">
+            <div class="row" ng-if="validateInputs()">                           
               <div class="col-sm-8 col-xs-8">
-                <input type="text" class="form-control" readonly="readonly" value="Flour">
+                <div class="input-group">
+                  <input id="ingredient" type="text" class="form-control" readonly="readonly" value="{{ingredient}}" placeholder="Eg: Milk">
+                  <span class="input-group-btn">
+                    <button class="btn edit-lqd-btn" type="button" ng-click="saveLiquid()">OK</button>
+                  </span>                  
+                </div>
+                <button ng-if="alias == 'Liquid'" class="edit-lqd" ng-click="editLiquid()">Change liquid's name</button>
               </div>
               <div class="col-sm-4 col-xs-4">
-                <input type="text" class="form-control" readonly="readonly" value="150 g">
+                <input type="text" class="form-control" readonly="readonly" value="{{result}}">
               </div> 
             </div><!--end row 4-->
-            <hr>
-            <div class="row">
+            <hr ng-if="validateInputs()">
+            <div class="row" ng-if="validateInputs()">
               <div class="col-sm-6 col-xs-6">
-                <button class="btn-simple btn-left" ><i class="fa fa-refresh"></i> Reset</button>
+                <button ng-click="resetForm()" class="btn-simple btn-left" ><i class="fa fa-refresh"></i> Reset</button>
               </div>
               <div class="col-sm-6 col-xs-6">
-                <button class="btn-simple btn-right" ><i class="fa fa-plus"></i> Add to recipe</button>
+                <button ng-click="addRecipe()" class="btn-simple btn-right" ><i class="fa fa-plus"></i> Add to recipe</button>
               </div>
             </div><!--end row -->
           </div>
@@ -138,38 +139,37 @@
 
          <div class="col-sm-6">
           <div class="card recipe">
-            <p class="title">MY RECIPE</p>
+            <!-- <p class="title">MY RECIPE</p> -->
+             <div class="input-group title">
+              <input readonly type="text" class="form-control" placeholder="Edit your recipe name" ng-model="recipeName" id="recipeName">
+              <span class="input-group-btn">
+                <button id="edit-recipe-btn" ng-click="editRecipeName()" class="btn btn-default" type="button" data-toggle="tooltip" data-placement="bottom" title="Change your recipe name"><i class="fa fa-pencil"></i></button>
+                <button id="save-recipe-btn" ng-click="saveRecipeName()" class="btn btn-default" type="button"><i class="fa fa-save"></i></button>
+              </span>
+            </div><!-- /input-group -->
             <hr>
 
-            <div class="input-group readonly">
-              <input type="text" class="form-control" value="Milk, 250 ml" readonly>
+            <div class="input-group readonly" ng-repeat="i in recipeList">
+              <span class="input-group-addon">{{i.weight}}</span>
+              <input type="text" class="form-control" value="{{i.ingredient}}" readonly>       
               <span class="input-group-btn">
-                <button class="btn btn-default delete" type="button"><i class="fa fa-close"></i></button>
-              </span>
-            </div><!-- READONLY input-group -->
-            <div class="input-group readonly">
-              <input type="text" class="form-control" value="Butter, 120 g" readonly>
-              <span class="input-group-btn">
-                <button class="btn btn-default delete" type="button"><i class="fa fa-close"></i></button>
+                <button ng-click="removeRecipe(i.idx)" class="btn btn-default delete" type="button"><i class="fa fa-close"></i></button>
               </span>
             </div><!-- READONLY input-group -->
 
              <div class="input-group editable">
-              <input type="text" class="form-control" placeholder="Add your own ingredients">
+              <input ng-model="custom" type="text" class="form-control" placeholder="Add your own ingredients" data-toggle="tooltip" data-placement="top" title="Separate measurement and ingredient with comma(,) Example: 120 g, Eggs">
               <span class="inputline"></span>
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button"><i class="fa fa-plus"></i></button>
+                <button ng-click="addCustomRecipe()" class="btn btn-default" type="button"><i class="fa fa-plus"></i></button>
               </span>
             </div><!-- /input-group -->
 
             <hr>
-            <div class="row">
-              <div class="col-sm-6 col-xs-6">
-                <button class="btn-simple btn-left" ><i class="fa fa-print"></i> Print</button>
-              </div>
-              <div class="col-sm-6 col-xs-6">
-                <button class="btn-simple btn-right" ><i class="fa fa-clone"></i> Copy</button>
-              </div>
+            <div class="row" id="recipe-btns">
+              <div class="col-sm-12 col-xs-12">
+                <button class="btn-simple btn-right" onclick="window.print()"><i class="fa fa-print"></i> Print</button>
+              </div>              
             </div><!--end row -->
           </div>
         </div>
@@ -180,6 +180,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://use.fontawesome.com/d33f9523b7.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+    <script type="text/javascript" src="js/util.js"></script>
+
+    <script type="text/javascript">
+      $('[data-toggle="tooltip"]').tooltip();
+    </script>
 
   </body>
 </html>
