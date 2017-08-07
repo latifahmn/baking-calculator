@@ -74,8 +74,8 @@
               <div class="col-sm-2 col-xs-2">
                 <h5>From: </h5>
               </div>
-              <div class="col-sm-5 col-xs-5" data-toggle="tooltip" data-placement="top" title="Numeric input only. Eg: 20, 100" >                        
-                  <input type="number" class="form-control" placeholder="Enter amount" ng-model="amount" id="amount">
+              <div class="col-sm-5 col-xs-5" data-toggle="tooltip" data-placement="top" title="Eg: 20, 1/2, 2 + 1/4" >                
+                  <input type="text" class="form-control" placeholder="Enter amount" ng-model="amount" id="amount" ng-keyup="validateAmount()">
                   <span class="inputline"></span>
               </div>
               <div class="col-sm-5 col-xs-5">
@@ -110,9 +110,17 @@
               </div>
             </div><!--end row3 -->
 
-            <hr ng-if="validateInputs()">
-            <div class="row" ng-if="validateInputs()">                           
-              <div class="col-sm-8 col-xs-8">
+            <div>
+              <button id="calc-btn" ng-click="calculate()" ng-disabled="!validateInputs()">Calculate</button>
+              <div ng-if="showOps" class="alert" role="alert">
+                <button type="button" class="close" aria-label="Close"><span aria-hidden="true" ng-click="dismissAlert()">&times;</span></button>
+                <strong>Oops!</strong> The amount to be converted is too small
+              </div>
+            </div>
+
+            <hr ng-if="showResult">
+            <div class="row" ng-if="showResult">                           
+              <div class="col-sm-7 col-xs-7">
                 <div class="input-group">
                   <input id="ingredient" type="text" class="form-control" readonly="readonly" value="{{ingredient}}" placeholder="Eg: Milk">
                   <span class="input-group-btn">
@@ -121,12 +129,12 @@
                 </div>
                 <button ng-if="alias == 'Liquid'" class="edit-lqd" ng-click="editLiquid()">Change liquid's name</button>
               </div>
-              <div class="col-sm-4 col-xs-4">
-                <input type="text" class="form-control" readonly="readonly" value="{{result}}">
+              <div class="col-sm-5 col-xs-5">
+                <div class="result" type="text" ng-bind-html="result"></div>
               </div> 
             </div><!--end row 4-->
-            <hr ng-if="validateInputs()">
-            <div class="row" ng-if="validateInputs()">
+            <hr ng-if="showResult">
+            <div class="row" ng-if="showResult">
               <div class="col-sm-6 col-xs-6">
                 <button ng-click="resetForm()" class="btn-simple btn-left" ><i class="fa fa-refresh"></i> Reset</button>
               </div>
@@ -141,7 +149,8 @@
           <div class="card recipe">
             <!-- <p class="title">MY RECIPE</p> -->
              <div class="input-group title">
-              <input readonly type="text" class="form-control" placeholder="Edit your recipe name" ng-model="recipeName" id="recipeName">
+              <input readonly type="text" class="form-control" placeholder="Edit your recipe name" ng-model="rName" id="recipeName">
+              <span class="inputline"></span>
               <span class="input-group-btn">
                 <button id="edit-recipe-btn" ng-click="editRecipeName()" class="btn btn-default" type="button" data-toggle="tooltip" data-placement="bottom" title="Change your recipe name"><i class="fa fa-pencil"></i></button>
                 <button id="save-recipe-btn" ng-click="saveRecipeName()" class="btn btn-default" type="button"><i class="fa fa-save"></i></button>
@@ -150,15 +159,15 @@
             <hr>
 
             <div class="input-group readonly" ng-repeat="i in recipeList">
-              <span class="input-group-addon">{{i.weight}}</span>
+              <span class="input-group-addon" ng-bind-html="i.weight"></span>
               <input type="text" class="form-control" value="{{i.ingredient}}" readonly>       
               <span class="input-group-btn">
                 <button ng-click="removeRecipe(i.idx)" class="btn btn-default delete" type="button"><i class="fa fa-close"></i></button>
               </span>
             </div><!-- READONLY input-group -->
 
-             <div class="input-group editable">
-              <input ng-model="custom" type="text" class="form-control" placeholder="Add your own ingredients" data-toggle="tooltip" data-placement="top" title="Separate measurement and ingredient with comma(,) Example: 120 g, Eggs">
+             <div class="input-group editable" data-toggle="tooltip" data-placement="top" title="Separate amount, unit and ingredient with comma(,) Example: 120, g, Eggs">
+              <input ng-model="custom" type="text" class="form-control" placeholder="Add your own ingredients">
               <span class="inputline"></span>
               <span class="input-group-btn">
                 <button ng-click="addCustomRecipe()" class="btn btn-default" type="button"><i class="fa fa-plus"></i></button>
@@ -181,6 +190,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://use.fontawesome.com/d33f9523b7.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-sanitize.js"></script>
+    <script type="text/javascript" src="js/chart.js"></script>
     <script type="text/javascript" src="js/util.js"></script>
 
     <script type="text/javascript">

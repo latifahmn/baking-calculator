@@ -140,7 +140,8 @@ input.form-control {
 }
 
 input.form-control[readonly] {
-	background: $secondary-color;
+	background: $tertiary-color;
+	border-color: $tertiary-color;
 	color: #fff;
 	border-radius: $border-radius;
 }
@@ -170,16 +171,60 @@ input.form-control[readonly] {
     @include transition(all 0.2s linear);
 }
 
-input.form-control:focus+.inputline {
+input:focus+.inputline {
   @include transform(scale(1));
 }
 
-input.form-control.ng-invalid + .inputline {
+input[readonly]:focus+.inputline {
+  @include transform(none);
+}
+
+input[readonly]+.inputline {
+  display: none;
+}
+
+input.form-control.invalid + .inputline {
 	background: $primary-color;
 }
 
 hr {
 	border-top: 1px solid $secondary-color;
+}
+
+#calc-btn {
+	width: 100%;
+    background: $secondary-color;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    padding: 6px 12px;
+    margin-top: 1em;
+    cursor: pointer;
+}
+#calc-btn:hover {
+	background: $secondary-color-dark;
+}
+
+#calc-btn[disabled] {
+	cursor: not-allowed;
+	background: #ddd;
+}
+#calc-btn[disabled]:hover {
+	background: #ddd;
+}
+
+.alert {
+	margin-top: 1em;
+    padding: 10px;
+    background: $primary-color-dark;
+    color: #fff;
+
+    .close {
+    	color: #fff;
+	    text-shadow: none;
+	    opacity: 0.8;
+	    margin-top: -0.1em;
+    }
 }
 
 .edit-lqd {
@@ -210,6 +255,14 @@ input[readonly] + .input-group-btn {
 .input-group .form-control[readonly] {
 	border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
+}
+
+.result {
+	background: $tertiary-color;
+    color: #fff;
+    height: 34px;
+    padding: 6px 12px;
+    border-radius: 4px;
 }
 
 .btn-simple {
@@ -270,9 +323,9 @@ input[readonly] + .input-group-btn {
 		.input-group-addon {
 			background: none;
 		    border: none;
-		    font-size: $font-size-default;
+		    font-size: 15px;
 		    font-weight: bold;
-		    width: 25%;
+		    width: 40%;
 		    text-align: right;
 		}
 
@@ -395,7 +448,7 @@ input[readonly] + .input-group-btn {
 }
 
 @media print {
-	#calculator, .tooltip, #recipe-btns, .editable, .recipe input[readonly] + .input-group-btn {
+	#calculator, .tooltip, #recipe-btns, .editable, .recipe input[readonly] + .input-group-btn, .recipe .input-group .input-group-btn .btn {
 		display: none;
 	}
 

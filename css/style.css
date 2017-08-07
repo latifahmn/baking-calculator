@@ -117,7 +117,8 @@ input.form-control {
 }
 
 input.form-control[readonly] {
-  background: #31928b;
+  background: #534833;
+  border-color: #534833;
   color: #fff;
   border-radius: 4px;
 }
@@ -139,19 +140,67 @@ input.form-control[readonly] {
   transition: all 0.2s linear;
 }
 
-input.form-control:focus + .inputline {
+input:focus + .inputline {
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   -o-transform: scale(1);
   transform: scale(1);
 }
 
-input.form-control.ng-invalid + .inputline {
+input[readonly]:focus + .inputline {
+  -webkit-transform: none;
+  -ms-transform: none;
+  -o-transform: none;
+  transform: none;
+}
+
+input[readonly] + .inputline {
+  display: none;
+}
+
+input.form-control.invalid + .inputline {
   background: #e94e57;
 }
 
 hr {
   border-top: 1px solid #31928b;
+}
+
+#calc-btn {
+  width: 100%;
+  background: #31928b;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  padding: 6px 12px;
+  margin-top: 1em;
+  cursor: pointer;
+}
+
+#calc-btn:hover {
+  background: #0B6962;
+}
+
+#calc-btn[disabled] {
+  cursor: not-allowed;
+  background: #ddd;
+}
+
+#calc-btn[disabled]:hover {
+  background: #ddd;
+}
+
+.alert {
+  margin-top: 1em;
+  padding: 10px;
+  background: #A81219;
+  color: #fff;
+}
+.alert .close {
+  color: #fff;
+  text-shadow: none;
+  opacity: 0.8;
+  margin-top: -0.1em;
 }
 
 .edit-lqd {
@@ -182,6 +231,14 @@ input[readonly] + .input-group-btn {
 .input-group .form-control[readonly] {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
+}
+
+.result {
+  background: #534833;
+  color: #fff;
+  height: 34px;
+  padding: 6px 12px;
+  border-radius: 4px;
 }
 
 .btn-simple {
@@ -240,9 +297,9 @@ input[readonly] + .input-group-btn {
 .recipe .input-group .input-group-addon {
   background: none;
   border: none;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
-  width: 25%;
+  width: 40%;
   text-align: right;
 }
 .recipe .input-group .inputline {
@@ -336,7 +393,7 @@ input[readonly] + .input-group-btn {
   }
 }
 @media print {
-  #calculator, .tooltip, #recipe-btns, .editable, .recipe input[readonly] + .input-group-btn {
+  #calculator, .tooltip, #recipe-btns, .editable, .recipe input[readonly] + .input-group-btn, .recipe .input-group .input-group-btn .btn {
     display: none;
   }
 }
