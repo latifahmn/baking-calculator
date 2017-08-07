@@ -180,7 +180,8 @@ app.controller('controller', function($scope,$sce) {
                         low_b = m*eval(table[key][to_index]);
                     }
                     else if (amount < m*cmp){
-                        high_b = m*eval(table[key][to_index]);                    
+                        high_b = m*eval(table[key][to_index]);
+                        break;                
 
                     } else if (amount == m*cmp){
                         console.log('FOUND EXACT MATCH!');                   
