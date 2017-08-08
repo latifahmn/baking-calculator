@@ -161,13 +161,13 @@ app.controller('controller', function($scope,$sce) {
             var frm_index = w_index[$scope.frmUnit];
             var to_index = w_index[$scope.toUnit];
             var m = 1; //multiple of
-            var mm = false;
-            if ( amount > eval(table["range6"][frm_index])){
-                mm = true;
-            }
+            var mm = false;            
 
             if (amount > eval(table["range1"][frm_index])){
-            
+                if ( amount > eval(table["range6"][frm_index])){
+                    mm = true;
+                }
+                
                 for(var key in table){ 
                     var cmp = eval(table[key][frm_index]);
 
